@@ -1,0 +1,5 @@
+Primeiro observar bem, prestar atenção e saber diferenciar o que o código DEVE FAZER!
+Depois ir desmembrando sabendo as palavras chaves (que serão as variáveis), os verbos(que serão as funções) e quais condições necessárias.
+Saber o Input e Output pra poder fazer um diagrama com as lógicas.
+Inicia um CÓDIGO FEIO na sua própria linguagem sem se preocupar ainda com a linguagem desejada e após isso ir alterando para o código na lingua desejada e ir testanto até dar o resultado desejado.
+Depois que o Output tiver OK é a hora de ir ajustado o código com os bons nomes às variáveis, otimizando o que der pra otimizar.
