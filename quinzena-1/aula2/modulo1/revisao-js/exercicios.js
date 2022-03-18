@@ -10,12 +10,29 @@ function retornaTamanhoArray(array) {
 
 // EXERCÍCIO 02
 function retornaArrayInvertido(array) {
-  
+    let novoArray = []
+  for(i=array.length ; i>0; i--) {
+    novoArray.push(array[i-1])
+  }
+  return novoArray
 }
 
 // EXERCÍCIO 03
 function retornaArrayOrdenado(array) {
-  
+  let i = 0
+  let j = 0
+  let novoArray = []
+  while(i<array.length) {
+    for(j=0 ; j<array.length ; j++) {
+        let itemMenor = array[i]
+        if(itemMenor > array[j]) {
+            itemMenor = array[j]
+        }
+    }
+    novoArray.push(itemMenor)
+    i++
+  }
+
 }
 
 // EXERCÍCIO 04
