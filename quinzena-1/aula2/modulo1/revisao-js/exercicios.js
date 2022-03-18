@@ -35,7 +35,13 @@ function retornaNumerosPares(array) {
 
 // EXERCÍCIO 05
 function retornaNumerosParesElevadosADois(array) {
-
+    let novoArrayParesAoQuadrado = []
+    for(let item of array){
+        if(item%2 === 0) {
+            novoArrayParesAoQuadrado.push(item*item)
+        }
+    }
+    return novoArrayParesAoQuadrado
 }
 
 // EXERCÍCIO 06
