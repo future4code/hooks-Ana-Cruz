@@ -94,45 +94,82 @@ function retornaNPrimeirosPares(n) {
 
 // EXERCÍCIO 09
 function classificaTriangulo(ladoA, ladoB, ladoC) {
-
+    if(ladoA === ladoB && ladoA === ladoC) {
+        return "Equilátero"
+    } else if(ladoA !== ladoB && ladoA !== ladoC && ladoB !== ladoC) {
+        return "Escaleno"
+    } else {
+        return "Isósceles"
+    }
 }
 
 // EXERCÍCIO 10
 function retornaSegundoMaiorESegundoMenor(array) {
-
+    let somador = 0
+    let maiorNumero = 0
+    for(let i = 0; i<array.length ; i++) {
+        for(let item of array) {
+            if(array[i] >= item){
+                somador++
+            }
+        }
+        if(somador === array.length) {
+            maiorNumero = array[i]
+            i = array.length
+        }
+        somador = 0
+    }
+    array.splice()
 }
 
 // EXERCÍCIO 11
 function retornaChamadaDeFilme(filme) {
-
+    return `Venha assistir ao filme ${filme.nome}, de ${filme.ano}, dirigido por ${filme.diretor} e estrelado por ${filme.atores.join(", ")}.`
 }
 
 // EXERCÍCIO 12
 function retornaPessoaAnonimizada(pessoa) {
+    return {...pessoa, nome: "ANÔNIMO"}
 
 }
 
 // EXERCÍCIO 13A
 function retornaPessoasAutorizadas(pessoas) {
-
+    return pessoas.filter( (obj) => {
+        return (obj.altura >= 1.5 && obj.idade >14 && obj.idade <60)
+    } )
 }
 
 // EXERCÍCIO 13B
 function retornaPessoasNaoAutorizadas(pessoas) {
-
+    return pessoas.filter( (obj) => {
+        return !(obj.altura >= 1.5 && obj.idade >14 && obj.idade <60)
+    } )
 }
 
 // EXERCÍCIO 14
 function retornaContasComSaldoAtualizado(contas) {
-
+    for(let item of contas) {
+        for(let i =0 ; i<item.compras.length ; i++) {
+            item.saldoTotal -= item.compras[i]
+        }
+        item.compras.splice(0,item.compras.length)
+    }
+    return contas
 }
 
 // EXERCÍCIO 15A
 function retornaArrayOrdenadoAlfabeticamente(consultas) {
-
+    return consultas.sort( (nome1, nome2) =>  {
+        if(nome1.nome > nome2.nome) return 1
+        if(nome1.nome < nome2.nome) return -1   
+        else return 0
+    } )
 }
 
 // EXERCÍCIO 15B
 function retornaArrayOrdenadoPorData(consultas) {
-
+    return consultas.sort( (data1, data2) =>  { 
+        return data1.dataDaConsulta.getTime() - data2.dataDaConsulta.getTime() 
+    } )
 }
