@@ -25,8 +25,8 @@ function retornaArrayOrdenado(array) {
 // EXERCÍCIO 04
 function retornaNumerosPares(array) {
     let novoArrayPares = []
-    for(let item of array){
-        if(item%2 === 0) {
+    for (let item of array) {
+        if (item % 2 === 0) {
             novoArrayPares.push(item)
         }
     }
@@ -36,9 +36,9 @@ function retornaNumerosPares(array) {
 // EXERCÍCIO 05
 function retornaNumerosParesElevadosADois(array) {
     let novoArrayParesAoQuadrado = []
-    for(let item of array){
-        if(item%2 === 0) {
-            novoArrayParesAoQuadrado.push(item*item)
+    for (let item of array) {
+        if (item % 2 === 0) {
+            novoArrayParesAoQuadrado.push(item * item)
         }
     }
     return novoArrayParesAoQuadrado
@@ -46,7 +46,21 @@ function retornaNumerosParesElevadosADois(array) {
 
 // EXERCÍCIO 06
 function retornaMaiorNumero(array) {
-
+    let somador = 0
+    let maiorNumero = 0
+    for(let i = 0; i<array.length ; i++) {
+        for(let item of array) {
+            if(array[i] >= item){
+                somador++
+            }
+        }
+        if(somador === array.length) {
+            maiorNumero = array[i]
+            i = array.length
+        }
+        somador = 0
+    }
+    return maiorNumero
 }
 
 // EXERCÍCIO 07
