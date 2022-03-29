@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Controle de Estoque</title>
+    <link rel="stylesheet" type="text/css" href="Styles.css">
 </head>
-<body>
-    <div>
-        <p>Cell Center</p>
+
+<body id="plano-de-fundo">
+    <div class="cabeçalho">
+        <h1 class="cabeçalho-texto-principal">Livinha's Cell</h1>
     </div>
-    
+
     <div>
-        <a href="index.html">Página Inicial</a>
-        <a href="ctrl-estoque.html">Controle de Estoque</a>
-        <a href="add-produto.html">Adicionar Produto</a>
-        <a href="funcionarios.html">Funcionários</a>
+        <ol>
+            <li> <a href="index.html">Página Inicial</a> </li>
+            <li> <a href="ctrl-estoque.html">Controle de Estoque</a> </li>
+            <li> <a href="add-produto.html">Adicionar Produto</a> </li>
+            <li> <a href="funcionarios.html">Funcionários</a> </li>
+        </ol>
     </div>
 
     <h2>Controle de Estoque</h2>
 
-    <table>
+    <table class="tabela">
         <tr>
             <th>Foto</th>
             <th>Descrição</th>
@@ -29,42 +34,46 @@
         </tr>
 
         <tr>
-            <td><img src="img/Iphone-12.jpg" alt="Iphone 12"/></td>
+            <td><img class="imagens-produto" src="img/Iphone-12.jpg" alt="Iphone 12" /></td>
             <td> Iphone 12 </td>
-            <td> 5000 </td>
+            <td> 5000,00 </td>
             <td> 2 </td>
         </tr>
 
         <tr>
-            <td><img src="img/Samsung-A10S.jpg" alt="Samsung A10s"/></td>
+            <td><img class="imagens-produto" src="img/Samsung-A10S.jpg" alt="Samsung A10s" /></td>
             <td> Samsung A10s </td>
-            <td> 1000 </td>
+            <td> 1000,00 </td>
             <td> 10 </td>
         </tr>
 
         <tr>
-            <td><img src="img/Iphone-X.jpg" alt="Iphone X"/></td>
+            <td><img class="imagens-produto" src="img/Iphone-X.jpg" alt="Iphone X" /></td>
             <td> Iphone X </td>
-            <td> 3500 </td>
+            <td> 3500,00 </td>
             <td> 3 </td>
         </tr>
 
         <tr>
-            <td><img src="img/Moto-G5.jpg" alt="Moto G5"/></td>
+            <td><img class="imagens-produto" src="img/Moto-G5.jpg" alt="Moto G5" /></td>
             <td> Moto G5 </td>
-            <td> 400 </td>
+            <td> 400,00 </td>
             <td> 2 </td>
         </tr>
-        
+
         <!-- Crie mais uma linha desta tabela abaixo \/ -->
         <tr>
-            <td><img src="img/Xiaomi-poco-X3.jpg" alt="Xiaomi poco X3"/></td>
+            <td><img class="imagens-produto" src="img/Xiaomi-poco-X3.jpg" alt="Xiaomi poco X3" /></td>
             <td> Xiaomi poco X3 </td>
-            <td> 1200 </td> 
+            <td> 1200,00 </td>
             <td> 5 </td>
         </tr>
 
     </table>
-
+    <footer class="rodape">
+        <p>Contato: 85 99999-8888 </p>
+        <p>E-mail: atendimento@livinhascell.com.br </p>
+    </footer>
 </body>
+
 </html>

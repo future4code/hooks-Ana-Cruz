@@ -1,43 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Adicionar Produto</title>
+    <link rel="stylesheet" type="text/css" href="Styles.css">
 </head>
-<body>
-    <div>
-        <p>Cell Center</p>
-    </div>
-    
-    <div>
-        <a href="index.html">Página Inicial</a>
-        <a href="ctrl-estoque.html">Controle de Estoque</a>
-        <a href="add-produto.html">Adicionar Produto</a>
-        <a href="funcionarios.html">Funcionários</a>
+
+<body id="plano-de-fundo">
+    <div class="cabeçalho">
+        <h1 class="cabeçalho-texto-principal">Livinha's Cell</h1>
     </div>
 
-    
+    <div>
+        <ol>
+            <li> <a href="index.html">Página Inicial</a> </li>
+            <li> <a href="ctrl-estoque.html">Controle de Estoque</a> </li>
+            <li> <a href="add-produto.html">Adicionar Produto</a> </li>
+            <li> <a href="funcionarios.html">Funcionários</a> </li>
+        </ol>
+    </div>
+
+
     <h2>Adicionar Produto</h2>
     <form action="">
         <div>
             <label for="link-foto">Link para foto: </label>
             <input type="url" id="link-foto" name="link-foto">
         </div>
-        
+
         <div>
             <label for="descricao">Descrição do produto: </label>
             <!-- Adicione o id apropriado para o input abaixo -->
             <input type="text" id="descricao" name="descricao">
         </div>
-        
+
         <div>
             <label for="preco">Preço (em R$): </label>
             <!-- Adicione o id apropriado e o type para receber números abaixo -->
             <input type="number" id="preco" name="preco">
         </div>
-        
+
         <div>
             <!-- Preencha as propriedades necessárias para os elementos abaixo -->
             <label for="qtde-disponivel">Quantidade disponível: </label>
@@ -50,6 +55,10 @@
         </div>
 
     </form>
-
+    <footer class="rodape">
+        <p>Contato: 85 99999-8888 </p>
+        <p>E-mail: atendimento@livinhascell.com.br </p>
+    </footer>
 </body>
+
 </html>
