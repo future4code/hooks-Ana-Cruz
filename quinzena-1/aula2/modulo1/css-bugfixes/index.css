@@ -66,6 +66,12 @@ div img {
   *
   **/
 
+.container-do-search input {
+    border: 0;
+    border-bottom: 2px solid black;
+    outline: 0;
+}
+
 #container-de-descricao {
     background-color: #2274a5;
     color: white;
