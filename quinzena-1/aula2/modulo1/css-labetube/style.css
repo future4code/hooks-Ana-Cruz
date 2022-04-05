@@ -1,0 +1,76 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+
+/* HEADER */
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: orange;
+    padding: 20px 40px 20px 20px;
+}
+
+.caixa-de-busca{
+    height: 30px;
+    width: 200px;
+}
+
+
+
+/* MAIN */
+.grid-videos{
+    margin: 1px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+    gap: 5px 5px;
+}
+
+.card{
+    width: 300px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid green;
+}
+
+.card video{
+    width: 100%;
+}
+
+.card p{
+    text-align: center;
+}
+
+
+.video-individual{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+
+.video-individual h1{
+    align-self: flex-start;
+}
+
+.video-individual video{
+    width: 90vw;
+    height: 90vh;
+}
+
+/* FOOTER */
+footer p{
+    text-align: center;
+    background-color: gray;
+    padding: 15px 0px;
+}
