@@ -4,6 +4,29 @@
 }
 
 
+@media screen and (max-width: 800px)
+{
+.grid-videos{
+    display: none;
+}
+ main {
+    display: flex;
+    flex-wrap: wrap;
+ }
+
+ .card{
+    width: 4vw;
+    height: 4vh;
+ }
+
+ .caixa-de-busca{
+    height: 1vh;
+    width: 20vw;
+ }
+
+}
+
+
 /* HEADER */
 header{
     display: flex;
