@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import { PostContainer, PostHeader, PostFooter, UserPhoto, PostPhoto} from './styled'
 
 import { IconeComContador } from '../IconeComContador/IconeComContador'
 
@@ -9,38 +9,8 @@ import iconeComentario from '../../img/comment_icon.svg'
 import { SecaoComentario } from '../SecaoComentario/SecaoComentario'
 import iconeSalvarBranco from '../../img/save-white.svg'
 import iconeSalvar from '../../img/save.svg'
-
-const PostContainer = styled.div`
-  border: 1px solid gray;
-  width: 300px;
-  margin-bottom: 10px;
-`
-
-const PostHeader = styled.div`
-  height: 40px;
-  display: flex;
-  align-items: center;
-  padding-left: 10px;
-`
-
-const PostFooter = styled.div`
-  height: 40px;
-  display: flex;
-  align-items: center;
-  padding: 0 10px;
-  justify-content: space-between;
-`
-
-const UserPhoto = styled.img`
-  height: 30px;
-  width: 30px;
-  margin-right: 10px;
-  border-radius: 50%;
-`
-
-const PostPhoto = styled.img`
-  width: 100%;
-`
+import iconeShare from '../../img/share.svg'
+import { SecaoCompartlhar } from '../SecaoCompartilhar/SecaoCompartilhar'
 
 
 class Post extends React.Component {
@@ -50,7 +20,8 @@ class Post extends React.Component {
     comentando: false,
     numeroComentarios: 0,
     salvo: false,
-    numeroSalvos: 0
+    numeroSalvos: 0,
+    compartilhado: false
   }
 
   onClickCurtida = () => {
@@ -87,6 +58,13 @@ class Post extends React.Component {
     }
   }
 
+  onClickCompartilhar = () => {
+    this.setState({
+      compartilhado: !this.state.compartilhado,
+    })
+    console.log(`state compartilhado: ${this.state.compartilhado}`)
+  }
+
   aoEnviarComentario = () => {
     this.setState({
       comentando: false,
@@ -95,9 +73,8 @@ class Post extends React.Component {
   }
 
 
-  render() {//Tem uma lógica dentro do render?
+  render() {
     let iconeCurtida
-
     if (this.state.curtido) {
       iconeCurtida = iconeCoracaoPreto
     } else {
@@ -105,17 +82,20 @@ class Post extends React.Component {
     }
 
     let componenteComentario
-
-    if (this.state.comentando) {//tag dentro da lógica??
+    if (this.state.comentando) {
       componenteComentario = <SecaoComentario aoEnviar={this.aoEnviarComentario} />
     }
 
     let iconeSalvo
-
     if (this.state.salvo) {
       iconeSalvo = iconeSalvar
     } else {
       iconeSalvo = iconeSalvarBranco
+    }
+    
+    let componenteCompartilhar
+    if(this.state.compartilhado){
+      componenteCompartilhar = <SecaoCompartlhar/>
     }
 
     return <PostContainer>
@@ -142,10 +122,17 @@ class Post extends React.Component {
         <IconeComContador
           icone={iconeSalvo}
           onClickIcone={this.onClickSalvo}
-          valorContador={this.state.numeroSalvos}
+          valorContador=""
+        />
+
+        <IconeComContador
+          icone={iconeShare}
+          onClickIcone={this.onClickCompartilhar}
+          valorContador=""
         />
       </PostFooter>
       {componenteComentario}
+      {componenteCompartilhar}
     </PostContainer>
   }
 }

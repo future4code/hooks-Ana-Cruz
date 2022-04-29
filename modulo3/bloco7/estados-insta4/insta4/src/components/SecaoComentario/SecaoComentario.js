@@ -1,18 +1,8 @@
-import React, {Component} from 'react'
-import styled from 'styled-components'
+import React from 'react'
+import { CommentContainer, InputComentario } from '../SecaoComentario/styled'
 
-const CommentContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    padding: 5px;
-`
 
-const InputComentario = styled.input`
-    width: 100%;
-    margin-right: 5px;
-`
-
-export class SecaoComentario extends Component {
+export class SecaoComentario extends React.Component {
 	state = {
 		valorComentario: ""
 	}
@@ -21,7 +11,6 @@ export class SecaoComentario extends Component {
 		this.setState({
 			valorComentario : event.target.value
 		})
-		console.log(`digitado ${this.state.valorComentario}`)
 	}
 
 	render() {
