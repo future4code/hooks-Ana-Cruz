@@ -11,7 +11,6 @@ function App() {
     <AppDad>
     <GlobalStyle />
     <Main />
-    {/* <Footer><p>&copy; All rights reserved | 2022</p></Footer> */}
   </AppDad>
   );
 }

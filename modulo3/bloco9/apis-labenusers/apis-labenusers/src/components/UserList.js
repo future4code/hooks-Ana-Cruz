@@ -1,17 +1,16 @@
 import React from 'react';
-import { CardUser } from '../styles';
+import { CardUserList } from '../styles';
 
 
 
 export class UserList extends React.Component {
     render() {
         return (
-            <CardUser>
+            <CardUserList>
                 <div onClick={this.props.onClickShowUser} >
-                    <p>{this.props.user.name}</p>
+                    {this.props.user.name}
                 </div>
-                <button onClick={this.props.onClickDeleteUser} >X</button>
-            </CardUser>
+            </CardUserList>
         )
     }
 }

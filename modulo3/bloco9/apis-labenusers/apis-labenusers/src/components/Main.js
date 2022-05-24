@@ -1,10 +1,10 @@
 import React from 'react';
 import axios from 'axios';
-import logo from '../img/logo.png'
-import { ContainerMain, PageUsersList } from '../styles'
+import logo from '../img/logo.png';
+import { ContainerMain, InputStyled, PageUsersList, UserList } from '../styles';
 import { PageHome } from './PageHome';
-import { PageUserList, UserList } from './UserList';
-import { PageUser, User } from './User';
+import { User } from './User';
+import { PageUser, UserDetail } from './UserDetail';
 
 
 const urlUsers = 'https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users'
@@ -20,12 +20,21 @@ const header = {
 export class Main extends React.Component {
     state = {
         usersList: [],
-        nameInput: '',
-        emailInput: '',
-        clicking: false,
-        opening: false,
-        userOpen: {}
+        clickSeeUserList: false,
+        showUserDetails: false,
+        showInput: false,
+        userOpen: {
+            id: '',
+            name: '',
+            email: ''
+        },
+        bodyInput: {
+            name: '',
+            email: ''
+        },
+        search: ''
     }
+
 
     componentDidMount = () => {
         this.getAllUsers()
@@ -41,18 +50,15 @@ export class Main extends React.Component {
     }
 
     addNewUser = () => {
-        const body = {
-            name: this.state.nameInput,
-            email: this.state.emailInput
-        }
+        const body = { ...this.state.bodyInput }
         axios.post(urlUsers, body, header
         ).then((res) => {
-            this.setState({ nameInput: '', emailInput: '', clicking: true })
+            this.setState({ bodyInput: { ...this.state.bodyInput, name: '', email: '' }, clickSeeUserList: true })
             this.getAllUsers()
             alert(`O usuário foi adicionado com sucesso!`)
         }).catch((err) => {
             alert(err.message)
-            this.setState({ nameInput: '', emailInput: '' })
+            this.setState({ bodyInput: { ...this.state.bodyInput, name: '', email: '' } })
         })
     }
 
@@ -61,66 +67,114 @@ export class Main extends React.Component {
         if (window.confirm(`Tem certeza que deseja deletar?`)) {
             axios.delete(`${urlUsers}/${id}`, header
             ).then((res) => {
-                this.setState({ nameInput: '', emailInput: '', opening: false })
+                this.setState({ bodyInput: { ...this.state.bodyInput, name: '', email: '' }, showUserDetails: false })
                 this.getAllUsers()
                 alert('Usuário deletado com sucesso')
             }).catch((err) => {
-                this.setState({ nameInput: '', emailInput: '', opening: false })
+                this.setState({ bodyInput: { ...this.state.bodyInput, name: '', email: '' }, showUserDetails: false })
                 alert(err.message)
             })
         } else {
             alert('Usuário não foi deletado')
-            this.setState({ nameInput: '', emailInput: '', opening: false })
+            this.setState({ bodyInput: { ...this.state.bodyInput, name: '', email: '' }, showUserDetails: false })
         }
     }
 
-    seeUsersList = () => {
-        this.setState({ clicking: true })
+    getUserById = (id) => {
+        axios.get(`${urlUsers}/${id}`, header
+        ).then((res) => {
+            this.setState({ userOpen: res.data })
+        }).catch((err) => {
+            alert(err.message)
+        })
     }
 
-    showUser = (index) => {
-        const thisUser = this.state.usersList[index]
-        this.setState({ opening: true, userOpen: thisUser })
+    editUser = (id) => {
+        const body = { ...this.state.bodyInput }
+        axios.put(`${urlUsers}/${id}`, body, header
+        ).then((res) => {
+            this.setState({ bodyInput: { ...this.state.bodyInput, name: '', email: '' }, showInput: false })
+            this.getAllUsers()
+            this.getUserById(id)
+            alert('Usuário alterado com sucesso!')
+        }).catch((err) => {
+            alert(err.message)
+            this.setState({ bodyInput: { ...this.state.bodyInput, name: '', email: '' } })
+        })
+    }
+
+    showInputEdit = () => {
+        this.setState({ showInput: true })
+    }
+
+    seeUsersList = () => {
+        this.setState({ clickSeeUserList: true })
+    }
+
+    showUser = (id) => {
+        this.getUserById(id)
+        this.setState({ showUserDetails: true })
     }
 
     returnPageHome = () => {
-        this.setState({ clicking: false, opening: false })
+        this.setState({ clickSeeUserList: false, showUserDetails: false })
     }
 
     returnPageList = () => {
-        this.setState({ clicking: true, opening: false })
+        this.setState({ clickSeeUserList: true, showUserDetails: false, showInput: false })
     }
 
     onChangeName = (ev) => {
-        this.setState({ nameInput: ev.target.value })
+        this.setState({ bodyInput: { ...this.state.bodyInput, name: ev.target.value } })
     }
 
     onChangeEmail = (ev) => {
-        this.setState({ emailInput: ev.target.value })
+        this.setState({ bodyInput: { ...this.state.bodyInput, email: ev.target.value } })
+    }
+
+    onChangeSearch = (ev) => {
+        this.setState({ search: ev.target.value })
     }
 
     // condição ? verdadeira : falsa
     render() {
         return (<ContainerMain>
-            {(!this.state.clicking ? <PageHome logo={logo} state={this.state}
-                onChangeName={this.onChangeName}
-                onChangeEmail={this.onChangeEmail}
-                onClickRegister={this.addNewUser}
-                onClickSeeList={this.seeUsersList} />
-                : <PageUsersList> {!this.state.opening ? <>
-                    {this.state.usersList.map((user, index) => {
-                        return (<UserList key={user.id}
-                            onClickShowUser={() => this.showUser(index)}
-                            onClickDeleteUser={() => this.deleteUser(user.id)} user={user} />)
-                    })}
-                    <button onClick={this.returnPageHome} >Return</button>
-                </>
-                    : <> <User name={this.state.userOpen.name}
-                        onClickDeleteUser={() => this.deleteUser(this.state.userOpen.id)} />
-                        <button onClick={this.returnPageList} >Return</button>
-                    </>
-                }
-                </PageUsersList>)}
+            {!this.state.clickSeeUserList ? //Se TRUE
+                <PageHome logo={logo} bodyInput={this.state.bodyInput}
+                    onChangeName={this.onChangeName}
+                    onChangeEmail={this.onChangeEmail}
+                    onClickRegister={this.addNewUser}
+                    onClickSeeList={this.seeUsersList} /> : //Se FALSE
+                <PageUsersList>
+                    {!this.state.showUserDetails ? //Sse true USER LIST
+                        <> 
+                            <InputStyled onChange={this.onChangeSearch}
+                            value={this.state.search} placeholder='Search user' />
+                            {this.state.usersList
+                            .filter((user) => {
+                                return user.name.toLocaleLowerCase().includes(
+                                    this.state.search.toLocaleLowerCase())
+                            })
+                            .map((user) => {
+                                return (<User key={user.id}
+                                    onClickShowUser={() => this.showUser(user.id)}
+                                    user={user} />)
+                            })}
+                            <button onClick={this.returnPageHome} >Return</button>
+                        </> : //se false USER DETAIL
+                        <>
+                            <UserDetail user={this.state.userOpen}
+                                onClickDeleteUser={() => this.deleteUser(this.state.userOpen.id)}
+                                onClickEditUser={this.showInputEdit}
+                                showInput={this.state.showInput}
+                                bodyInput={this.state.bodyInput}
+                                onChangeName={this.onChangeName}
+                                onChangeEmail={this.onChangeEmail}
+                                onClickRegister={() => this.editUser(this.state.userOpen.id)} />
+                            <button onClick={this.returnPageList} >Return</button>
+                        </>
+                    }
+                </PageUsersList>}
         </ContainerMain>
         );
     }

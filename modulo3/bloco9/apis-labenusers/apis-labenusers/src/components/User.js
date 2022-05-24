@@ -1,18 +1,16 @@
 import React from 'react';
-import { CardUser } from '../styles';
+import { CardUserList } from '../styles';
 
 
 
 export class User extends React.Component {
     render() {
         return (
-            <CardUser>
-                <div>
-                    <p>{this.props.name}</p>
+            <CardUserList>
+                <div onClick={this.props.onClickShowUser} >
+                    {this.props.user.name}
                 </div>
-                <button onClick={this.propsonClickDeleteUser} >X</button>
-                {/* <button onClick={this.props.onClickreturnPageList} >Return</button> */}
-            </CardUser>
+            </CardUserList>
         )
     }
 }
