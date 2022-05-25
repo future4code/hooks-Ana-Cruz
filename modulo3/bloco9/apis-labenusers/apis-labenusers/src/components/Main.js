@@ -1,10 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import logo from '../img/logo.png';
-import { ContainerMain, InputStyled, PageUsersList, UserList } from '../styles';
+import { ContainerMain, InputStyled, PageUsersList } from '../styles';
 import { PageHome } from './PageHome';
 import { User } from './User';
-import { PageUser, UserDetail } from './UserDetail';
+import { UserDetail } from './UserDetail';
 
 
 const urlUsers = 'https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users'
