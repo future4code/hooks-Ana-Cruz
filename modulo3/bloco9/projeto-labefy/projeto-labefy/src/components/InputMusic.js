@@ -24,7 +24,7 @@ const IputMusicContainer = styled.div`
     }
 `
 
-export class IputMusic extends React.Component {
+export class InputMusic extends React.Component {
     render() {
         return (
             <IputMusicContainer>

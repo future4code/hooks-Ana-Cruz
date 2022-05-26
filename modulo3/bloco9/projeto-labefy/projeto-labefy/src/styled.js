@@ -4,6 +4,7 @@ import imgBackground from './img/background-img.png'
 export const AppDad = styled.div`
     background-color: black;
     max-width: 100vw;
+    max-height: 100vh;
 `
 
 export const ImgContainer = styled.section`
@@ -35,7 +36,6 @@ export const MainContainer = styled.div`
 `
 
 export const PlaylistsContainer = styled.div`
-    /* border: 1px solid green; */
     margin: 20px 0;
     display: flex;
     flex-direction: row;

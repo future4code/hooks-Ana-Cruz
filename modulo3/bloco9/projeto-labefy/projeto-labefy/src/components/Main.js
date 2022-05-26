@@ -4,7 +4,7 @@ import { Footer, ImgContainer, MainContainer, TransparencyContainer, AllPlaylist
 import { InputPlaylist } from './InputPlaylist';
 import { Playlist } from './Playlist';
 import addImage from '../img/add.png';
-import { IputMusic } from './IputMusic';
+import { InputMusic } from './InputMusic';
 
 const urlPlaylist = 'https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists'
 const header = {
@@ -130,6 +130,7 @@ export class Main extends React.Component {
                         <InputPlaylist value={this.state.namePlaylistInput}
                             onChangePlaylistName={this.onChangePlaylistName}
                             buttonCreatePlaylist={this.createPlaylist} />
+
                         <PlaylistsContainer>
                             <AllPlaylists>
                                 <h2>Playlists</h2>
@@ -140,6 +141,7 @@ export class Main extends React.Component {
                                             onClickdeletePlaylist={() => this.deletePlaylist(item.id)} />
                                     })}
                             </AllPlaylists>
+
                             <DetailPlaylist>
                                 {this.state.showPlaylist && <h2>{this.state.namePlaylistSelected}</h2>}
                                 {(this.state.showPlaylist && !(this.state.musics.length > 0)) ? <p>Não contém músicas!</p> :
@@ -149,12 +151,13 @@ export class Main extends React.Component {
                                 {!this.state.showPlaylist ? <></> :
                                     (!this.state.showInput ? <img src={addImage}
                                         onClick={this.showInput} /> :
-                                        <IputMusic onChangeName={this.onChangeName}
+                                        <InputMusic onChangeName={this.onChangeName}
                                             onChangeArtist={this.onChangeArtist} onChangeUrl={this.onChangeUrl}
                                             addTrackToPlaylist={() => this.addTrackToPlaylist(this.state.idPlaylistSelected)}
                                             bodyInput={this.state.bodyInput} />)}
                             </DetailPlaylist>
                         </PlaylistsContainer>
+
                         <Footer><p>&copy; All rights reserved | 2022</p></Footer>
                     </MainContainer>
                 </TransparencyContainer>
