@@ -1,17 +1,25 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 40%;
-    overflow-y: auto;
-    h2{
-        align-self: center;
-    }
 
     @media (max-width: 768px) {
         width: 100%;
         height: 45%;
+    }
+`
+
+export const List = styled.div`
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-y: auto;
+
+    @media (max-width: 768px) {
+        width: 90%;
     }
 `

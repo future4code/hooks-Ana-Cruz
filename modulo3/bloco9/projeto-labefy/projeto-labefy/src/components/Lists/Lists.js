@@ -24,13 +24,14 @@ export class Lists extends React.Component {
             artist: '',
             url: ''
         },
-        showAudioPLayer: true
+        showAudioPLayer: false
     }
 
     componentDidMount() {
         this.getAllPlaylist()
     }
 
+    /*--------GET--------*/
     getAllPlaylist = () => {
         axios.get(urlPlaylist, header)
             .then((res) => {
@@ -40,37 +41,6 @@ export class Lists extends React.Component {
             .catch((err) => {
                 alert('err getAllPlaylist', err.message)
                 console.log('err getAllPlaylist', err)
-            })
-    }
-
-    createPlaylist = () => {
-        const body = {
-            name: this.state.namePlaylistInput
-        }
-        axios.post(urlPlaylist, body, header)
-            .then((res) => {
-                this.setState({ namePlaylistInput: '' })
-                alert(`Playlist ${this.state.namePlaylistInput} adicionada com sucesso!`)
-                this.getAllPlaylist()
-            })
-            .catch((err) => {
-                alert('Err CreatePlaylist', err.message)
-                this.setState({ namePlaylistInput: '' })
-                console.log("Err Create", err)
-            })
-    }
-
-    deletePlaylist = (id) => {
-        axios.delete(`${urlPlaylist}/${id}`, header)
-            .then((res) => {
-                this.setState({
-                    showPlaylistMusics: false, showInputMusics: false,
-                    namePlaylistSelected: ''
-                })
-                alert('Playlist deletada com sucesso')
-            })
-            .catch((err) => {
-                alert('Err deletePlaylist', err.message)
             })
     }
 
@@ -85,17 +55,59 @@ export class Lists extends React.Component {
             })
     }
 
+    /*--------POST--------*/
+    createPlaylist = () => {
+        const body = {
+            name: this.state.namePlaylistInput
+        }
+        if(!this.state.namePlaylistInput){
+            alert("Você não digitou um nome!")
+        }else{
+            axios.post(urlPlaylist, body, header)
+                .then((res) => {
+                    this.setState({ namePlaylistInput: '' })
+                    alert(`Playlist ${this.state.namePlaylistInput} adicionada com sucesso!`)
+                    this.getAllPlaylist()
+                })
+                .catch((err) => {
+                    alert('Err CreatePlaylist', err.message)
+                    this.setState({ namePlaylistInput: '' })
+                    console.log("Err Create", err)
+                })
+        }
+    }
+    
     addTrackToPlaylist = (id) => {
         const body = { ...this.state.bodyInput }
-        axios.post(`${urlPlaylist}/${id}/tracks`, body, header)
+        if(!this.state.bodyInput.name || !this.state.bodyInput.artist || !this.state.bodyInput.url){
+            alert('Verifique se preencheu todos os campos!')
+        }else{
+            axios.post(`${urlPlaylist}/${id}/tracks`, body, header)
+                .then((res) => {
+                    this.setState({ bodyInput: { ...this.state.bodyInput, name: '', artist: '', url: '' } })
+                    this.getMusicsPlaylistId(id)
+                    alert(`Musica ${this.state.bodyInput.name} adicionada com sucesso!`)
+                })
+                .catch((err) => {
+                    alert(err.message)
+                    this.setState({ bodyInput: { ...this.state.bodyInput, name: '', artist: '', url: '' } })
+                })
+        }
+    }
+
+    /*--------DELETE--------*/
+    deletePlaylist = (id) => {
+        axios.delete(`${urlPlaylist}/${id}`, header)
             .then((res) => {
-                this.setState({ bodyInput: { ...this.state.bodyInput, name: '', artist: '', url: '' } })
-                this.getMusicsPlaylistId(id)
-                alert(`Musica ${this.state.bodyInput.name} adicionada com sucesso!`)
+                this.setState({
+                    showPlaylistMusics: false, showInputMusics: false,
+                    namePlaylistSelected: ''
+                })
+                alert('Playlist deletada com sucesso')
+                this.getAllPlaylist()
             })
             .catch((err) => {
-                alert(err.message)
-                this.setState({ bodyInput: { ...this.state.bodyInput, name: '', artist: '', url: '' } })
+                alert('Err deletePlaylist', err.message)
             })
     }
 
@@ -154,6 +166,7 @@ export class Lists extends React.Component {
                     showInputMusics={this.state.showInputMusics}
                     showInput={this.showInput}
                     addTrackToPlaylist={() => this.addTrackToPlaylist(this.state.idPlaylistSelected)}
+                    getMusicsPlaylistId={() => this.getMusicsPlaylistId(this.state.idPlaylistSelected)}
                     onChangeName={this.onChangeName} onChangeArtist={this.onChangeArtist}
                     onChangeUrl={this.onChangeUrl} bodyInput={this.state.bodyInput}
                     showAudioPLayer={this.state.showAudioPLayer} />

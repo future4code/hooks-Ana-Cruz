@@ -1,6 +1,6 @@
 import React from 'react';
 import { Lists } from '../Lists/Lists';
-import { Container, ListsContainer } from './styles';
+import { Container } from './styles';
 
 
 export class MainContainer extends React.Component {

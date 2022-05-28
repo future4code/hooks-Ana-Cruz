@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    background: rgba(0, 0, 0, 0.7);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     width: 55%;
-    overflow-y: auto;
+    max-height: 100%;
+  
     h2{
         align-self: center;
     }
@@ -26,16 +26,43 @@ export const Container = styled.div`
 
     @media (max-width: 768px) {
         width: 100%;
-        height: 45%;
+        height: 55%;
+    }
+`
+
+export const List = styled.div`
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    overflow-y: auto;
+
+    @media (max-width: 768px) {
+        width: 90%;
+        max-height: 55%;
     }
 `
 
 export const AudioPlayer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
     div{
+        width: 100%;
+        cursor: pointer;
+    &:hover{
+        border: 1px solid coral;
+        }
+    }
+    p{
         cursor: pointer;
     }
-    :hover{
-        border: 1px solid coral;
+
+    @media (max-width: 768px) {
+        width: 90%;
     }
 `
 
@@ -52,7 +79,7 @@ export const Player = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+    overflow-y: auto;
     button{
         margin-top: 10px;
         background-color: coral;

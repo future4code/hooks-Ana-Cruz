@@ -1,18 +1,16 @@
 import React from 'react';
 import GlobalStyle from './GlobalStyle'
-import { Main } from './components/Main';
+import { Main } from './components/Main/Main'
 import { AppDad } from './styled';
-import { MainTeste } from './components/MainTeste/MainTeste';
 
 class App extends React.Component {
 
-  render(){
+  render() {
     return (
       <AppDad>
-      <GlobalStyle />
-      {/* <Main /> */}
-      <MainTeste />
-    </AppDad>
+        <GlobalStyle />
+        <Main />
+      </AppDad>
     );
   }
 }

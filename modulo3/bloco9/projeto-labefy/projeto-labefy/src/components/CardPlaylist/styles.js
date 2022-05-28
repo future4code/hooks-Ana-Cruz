@@ -3,18 +3,23 @@ import styled from 'styled-components';
 export const Container = styled.div`
 display: flex;
 flex-direction: row;
-justify-content: space-between;
+justify-content: space-around;
 align-items: center;
 
 div{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     width: 250px;
     max-width: auto;
     height: 40px;
+    
+    &:hover{
+        background-color: rgba(255, 127, 80, 0.7);
+        color: black;
+    }
 }
-div:hover{
-    background-color: rgba(255, 127, 80, 0.7);
-    color: black;
-}
+
 img{
     max-width: 40%;
     height: auto;
