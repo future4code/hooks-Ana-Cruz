@@ -31,14 +31,14 @@ const Post = (props) => {
 
   const enviarComentario = (comentario) => {
     const listaDeComentarios = [...comentarios, comentario]
-    setComentários(listaDeComentarios)
+    setComentarios(listaDeComentarios)
     setComentando(false)
     setNumeroComentarios(numeroComentarios + 1)
   }
 
   const iconeCurtida = curtido
-    ? (iconeCoracaoPreto)
-    : (iconeCoracaoBranco)
+    ? iconeCoracaoPreto
+    : iconeCoracaoBranco
 
     const caixaDeComentario= comentando 
     ? (
