@@ -42,7 +42,7 @@ export const ChoiceMatch = () => {
     
     const getProfileToChoose = () => {
         axios
-        .get(`${BASE_URL}/ana/person`)
+        .get(`${BASE_URL}/person`)
         .then(res => {
             setProfile(res.data.profile)
         })
@@ -55,12 +55,15 @@ export const ChoiceMatch = () => {
             choice: choice
         }
         axios
-        .post(`${BASE_URL}/ana/choose-person`, body)
+        .post(`${BASE_URL}/choose-person`, body)
         .then(res => {
-            console.log(res.data.isMatch)
             getProfileToChoose()
         })
         .catch(err => console.log(err))
+    }
+
+    const listar = () => {
+        getProfileToChoose()
     }
 
 

@@ -1,9 +1,11 @@
+import axios from "axios";
 import { useState } from "react";
 import { ChoiceMatch } from "./components/ChoiceMatch";
 import { Header } from "./components/Header";
 import { ListMatch } from "./components/ListMatch";
+import { BASE_URL } from "./constants";
 import { GlobalStyle } from "./GlobalStyle";
-import { Container, Main } from "./styles";
+import { Button1, Container, Main } from "./styles";
 
 
 function App() {
@@ -24,6 +26,13 @@ function App() {
     setCurrentPage(currentPageName)
   }
 
+  const clear = () => {
+    axios
+    .put(`${BASE_URL}/clear`)
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+  }
+
   return (
     <Main>
       <Container>
@@ -32,6 +41,7 @@ function App() {
         <hr />
         {changeCurrentPage()}
       </Container>
+      <Button1 onClick={() => clear()} >Clear</Button1>
     </Main>
   );
 }

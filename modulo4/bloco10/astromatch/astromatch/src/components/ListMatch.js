@@ -23,7 +23,7 @@ export const ListMatch = (props) => {
 
     const getMatches = () => {
         axios
-        .get(`${BASE_URL}/ana/matches`)
+        .get(`${BASE_URL}/matches`)
         .then(res => {
             setMatches(res.data.matches)
             console.log(res.data.matches)
