@@ -1,11 +1,19 @@
-import axios from "axios";
 import { useState } from "react";
 import { ChoiceMatch } from "./components/ChoiceMatch";
 import { Header } from "./components/Header";
 import { ListMatch } from "./components/ListMatch";
-import { BASE_URL } from "./constants";
 import { GlobalStyle } from "./GlobalStyle";
-import { Button1, Container, Main } from "./styles";
+import { Container, Main } from "./styles";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { grey } from '@mui/material/colors';
+
+const outerTheme = createTheme({
+  palette: {
+    primary: {
+      main: grey[300],
+    },
+  },
+});
 
 
 function App() {
@@ -26,22 +34,17 @@ function App() {
     setCurrentPage(currentPageName)
   }
 
-  const clear = () => {
-    axios
-    .put(`${BASE_URL}/clear`)
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
-  }
 
   return (
     <Main>
-      <Container>
-        <GlobalStyle />
-        <Header currentPage={currentPage} changePage={changePage} />
-        <hr />
-        {changeCurrentPage()}
-      </Container>
-      <Button1 onClick={() => clear()} >Clear</Button1>
+      <ThemeProvider theme={outerTheme}>
+        <Container>
+          <GlobalStyle />
+          <Header currentPage={currentPage} changePage={changePage} />
+          <hr />
+          {changeCurrentPage()}
+        </Container>
+      </ThemeProvider>
     </Main>
   );
 }

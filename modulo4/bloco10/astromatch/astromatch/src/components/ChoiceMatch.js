@@ -4,10 +4,9 @@ import styled from "styled-components";
 import { BASE_URL } from "../constants";
 import { ProfileCard } from "./ProfileCard";
 import { FcLike } from 'react-icons/fc';
-import { AiOutlineCloseCircle } from 'react-icons/ai'
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 const Container = styled.div`
-    /* border: 1px solid red; */
     height: 83%;
     display: flex;
     flex-direction: column;
@@ -16,7 +15,6 @@ const Container = styled.div`
 `
 
 const Buttons = styled.div`
-    /* border: 1px solid green; */
     width: 90%;
     height: 15%;
     display: flex;
@@ -43,9 +41,7 @@ export const ChoiceMatch = () => {
     const getProfileToChoose = () => {
         axios
         .get(`${BASE_URL}/person`)
-        .then(res => {
-            setProfile(res.data.profile)
-        })
+        .then(res => setProfile(res.data.profile)) 
         .catch(err => console.log(err))
     }
 
@@ -56,14 +52,8 @@ export const ChoiceMatch = () => {
         }
         axios
         .post(`${BASE_URL}/choose-person`, body)
-        .then(res => {
-            getProfileToChoose()
-        })
+        .then(res => getProfileToChoose())
         .catch(err => console.log(err))
-    }
-
-    const listar = () => {
-        getProfileToChoose()
     }
 
 

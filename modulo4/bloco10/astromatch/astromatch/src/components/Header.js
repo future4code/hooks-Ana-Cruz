@@ -12,7 +12,7 @@ const Container = styled.div`
     }
 `
 
-const Button = styled.button`
+const Buttons = styled.button`
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -20,19 +20,22 @@ const Button = styled.button`
     color: green;
     position: absolute; //para deixar o item que for Absoluto em referencia ao Relative
     //se for translate(0, 0) fica no centro do H1 RELATIVE
-    transform: ${props => props.teste === 'ListMatch' ? 'translate(-170px, 5px)' : 'translate(170px, 5px)'};
+    transform: ${props => props.teste === 'ListMatch' ? 'translate(-152px, 5px)' : 'translate(152px, 5px)'};
+
+    @media screen and (max-width: 425px) {
+        transform: ${props => props.teste === 'ListMatch' ? 'translate(-40vw, 5px)' : 'translate(40vw, 5px)'};
+    }
 `
 
 export const Header = (props) => {
-    console.log(props.currentPage)
     return (
         <Container>
             <h2>Astromatch</h2>
             {props.currentPage === 'ListMatch'
-                ? <Button teste={props.currentPage}
-                    onClick={() => props.changePage('ChoiceMatch')}  ><CgProfile /></Button>
-                : <Button teste={props.currentPage}
-                    onClick={() => props.changePage('ListMatch')} ><FaListUl /></Button>}
+                ? <Buttons teste={props.currentPage}
+                    onClick={() => props.changePage('ChoiceMatch')}  ><CgProfile /></Buttons>
+                : <Buttons teste={props.currentPage}
+                    onClick={() => props.changePage('ListMatch')} ><FaListUl /></Buttons>}
         </Container>
     );
 }
