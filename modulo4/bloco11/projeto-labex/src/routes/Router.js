@@ -1,11 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HomePage from '../pages/HomePage';
-import AdminHomePage from '../pages/AdminHomePage';
-import CreateTripPage from '../pages/CreateTripPage';
-import ApplicationFormPage from '../pages/ApplicationFormPage';
-import ListTripsPage from '../pages/ListTripsPage';
-import LoginPage from '../pages/LoginPage';
-import TripDetailsPage from '../pages/TripDetailsPage';
+import HomePage from '../pages/HomePage/HomePage';
+import AdminHomePage from '../pages/AdminHomePage/AdminHomePage';
+import CreateTripPage from '../pages/CreateTripPage/CreateTripPage';
+import ApplicationFormPage from '../pages/ApplicationFormPage/ApplicationFormPage';
+import ListTripsPage from '../pages/ListTripsPage/ListTripsPage';
+import LoginPage from '../pages/LoginPage/LoginPage';
+import TripDetailsPage from '../pages/TripDetailsPage/TripDetailsPage';
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 
 const Router = () => {
@@ -15,12 +16,13 @@ const Router = () => {
       <BrowserRouter>
         <Routes>
             <Route index element={<HomePage />} />
-            <Route path='AdminHomePage' element={<AdminHomePage />} />
-            <Route path='CreateTripPage' element={<CreateTripPage />} />
-            <Route path='ApplicationFormPage' element={<ApplicationFormPage />} />
-            <Route path='ListTripsPage' element={<ListTripsPage />} />
-            <Route path='LoginPage' element={<LoginPage />} />
-            <Route path='TripDetailsPage' element={<TripDetailsPage />} />
+            <Route path='/admin' element={<AdminHomePage />} />
+            <Route path='/admin/trips/create' element={<CreateTripPage />} />
+            <Route path='/trips/application' element={<ApplicationFormPage />} />
+            <Route path='/trips/list' element={<ListTripsPage />} />
+            <Route path='/login' element={<LoginPage />} />
+            <Route path='/admin/trips/:id' element={<TripDetailsPage />} />
+            <Route path='*' element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>
     );
