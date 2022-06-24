@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../../components/Header";
 import InputItem from "../../components/InputItem";
 import { BASE_URL } from "../../constants";
 import axios from 'axios';
@@ -27,9 +26,8 @@ const LoginPage = () => {
 
     axios.post(`${BASE_URL}/login`, body)
       .then(res => {
-        console.log(res)
         localStorage.setItem("tokenLabeX", res.data.token)
-        navigate('/AdminHomePage')
+        navigate('/admin')
       })
       .catch(err => console.log(err.message))
   }

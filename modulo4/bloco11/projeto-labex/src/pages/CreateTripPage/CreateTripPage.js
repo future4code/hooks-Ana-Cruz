@@ -50,7 +50,7 @@ const CreateTripPage = () => {
       auth: localStorage.getItem('tokenLabeX')
     }
     axios.post(`${BASE_URL}/trips`, body, headers)
-    .then(res => console.log(res))
+    .then(res => alert(res.data))
     .catch(err => console.log(err))
   }
 

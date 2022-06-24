@@ -3,10 +3,12 @@ import { countries } from '../../constants/countries';
 import { useState } from "react";
 import { BASE_URL } from "../../constants/index";
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const ApplicationFormPage = (props) => {
+const ApplicationFormPage = () => {
     const navigate = useNavigate()
+
+    const { id } = useParams()
 
     const [inputName, setInputName] = useState('')
     const [inputAge, setInputAge] = useState('')
@@ -47,17 +49,17 @@ const ApplicationFormPage = (props) => {
             country: selectedCountry
         }
 
-        axios.post(`${BASE_URL}/trips/${props.idTrip}/apply`, body)
+        axios.post(`${BASE_URL}/trips/${id}/apply`, body)
             .then(res => {
                 alert(res.data.message)
-                props.returnTrip()
+                navigate('/trips/list')
             })
             .catch(err => console.log(err))
     }
 
     return (
         <div>
-            <button onClick={() => navigate(-1)} >Back</button>
+            <button onClick={() => navigate('/trips/list')} >Back</button>
             <InputItem type='text' placeholder='Name' value={inputName} onChange={(ev) => onChangeInputName(ev)} />
             <InputItem type='number' placeholder='Age' value={inputAge} onChange={(ev) => onChangeInputAge(ev)} />
             <InputItem type='text' placeholder='Why am I a good candidate?'
