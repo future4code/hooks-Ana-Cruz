@@ -2,13 +2,20 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     border: 1px solid red;
-    width: 70%;
-    height: 80%;
+    width: 90%;
+    height: 90%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
 `
+export const ContainerButton = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`
+
 
 export const Button = styled.button`
   margin: 15px 0;

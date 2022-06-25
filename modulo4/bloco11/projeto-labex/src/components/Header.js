@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Container = styled.div`
     width: 100vw;
     height: 15vh;
-    background-color: pink;
+    /* background-color: pink; */
     color: gray;
     display: flex;
     justify-content: center;

@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { Container } from './styleHomePage';
+import { Button, Container } from './styleHomePage';
+
 
 
 const HomePage = () => {
@@ -7,8 +8,8 @@ const HomePage = () => {
   
     return (
       <Container>
-        <button onClick={() => navigate('/admin')} >Admin</button>
-        <button onClick={() => navigate('/trips/list')} >Lista de Viagens</button>
+        <Button onClick={() => navigate('/admin')} >Admin</Button>
+        <Button onClick={() => navigate('/trips/list')} >Lista de Viagens</Button>
       </Container>
     );
   }
