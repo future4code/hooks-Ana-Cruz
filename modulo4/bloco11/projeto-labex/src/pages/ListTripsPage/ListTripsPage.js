@@ -1,8 +1,6 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RenderTrips from '../../components/RenderTrips';
-import { BASE_URL } from '../../constants';
+import { Button } from './styleListTripsPage';
 
 const ListTripsPage = () => {
   const navigate = useNavigate()
@@ -11,7 +9,7 @@ const ListTripsPage = () => {
 
   return (
     <div>
-      <button onClick={() => navigate(-1)} >Back</button>
+      <Button onClick={() => navigate(-1)} >Back</Button>
       <RenderTrips token={token} />
     </div>
   );

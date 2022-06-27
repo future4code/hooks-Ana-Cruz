@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../../components/Header";
 import InputItem from "../../components/InputItem";
-import { BASE_URL } from "../../constants";
-import axios from 'axios';
+import { BASE_URL, headers } from "../../constants";
 import { useProtectedPage } from "../../hooks/useProtectedPage";
+import { useCreateTrip } from "../../hooks/useRequestData";
+import { planets } from '../../constants/planets';
 
 
 const CreateTripPage = () => {
@@ -38,33 +38,29 @@ const CreateTripPage = () => {
     setInputDurationInDays(ev.target.value)
   }
 
-  const createTrip = () => {
-    const body = {
-      name: inputName,
-      planet: inputPlanet,
-      date: inputDate,
-      description: inputDescription,
-      durationInDays: inputDurationInDays
-    }
-    const headers = {
-      auth: localStorage.getItem('tokenLabeX')
-    }
-    axios.post(`${BASE_URL}/trips`, body, headers)
-    .then(res => alert(res.data))
-    .catch(err => console.log(err))
+  const body = {
+    name: inputName,
+    planet: inputPlanet,
+    date: inputDate,
+    description: inputDescription,
+    durationInDays: inputDurationInDays
   }
 
-  
+  const { post } = useCreateTrip()
+
+  const renderPlanets = planets.map((planet, index) => {
+    return <option key={index} value={planet} >{planet}</option>
+  })
 
   return (
     <div>
       <button onClick={() => navigate(-1)} >Back</button>
+
       <InputItem type='text' placeholder='Name' value={inputName}
         onChange={(ev) => onChangeInputName(ev)} />
-      <InputItem type='text' placeholder='Planet' value={inputPlanet}
-        onChange={(ev) => onChangeInputPlanet(ev)} />
-      <select>
-        <option>Planetas</option>
+      <select value={inputPlanet} onChange={(ev) => onChangeInputPlanet(ev)} >
+        <option value='' >Planetas</option>
+        {renderPlanets}
       </select>
       <InputItem type='date' placeholder='Date' value={inputDate}
         onChange={(ev) => onChangeInputDate(ev)} />
@@ -72,7 +68,8 @@ const CreateTripPage = () => {
         onChange={(ev) => onChangeInputDescription(ev)} />
       <InputItem type='number' placeholder='Duration (in days)' value={inputDurationInDays}
         onChange={(ev) => onChangeInputDurationInDays(ev)} />
-      <button onClick={() => createTrip()} >Create</button>
+
+      <button onClick={() => post(`${BASE_URL}/trips`, body, headers)} >Create</button>
     </div>
   );
 }

@@ -1,21 +1,40 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 90%;
     height: 90%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    h2{
+      color: pink;
+    }
 `
+
+export const CardTrip = styled.div`
+  /* border: 1px solid white; */
+  padding: 0 8%;
+  text-align: center;
+  width: 60%;
+  height: 10%;
+  color: pink;
+  cursor: pointer;
+  
+  &:hover{
+    background-color: rgb(255,127,80, 0.7);
+    color: white;
+    border: none;
+  }
+`
+
 export const ContainerButton = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 `
-
 
 export const Button = styled.button`
   margin: 15px 0;

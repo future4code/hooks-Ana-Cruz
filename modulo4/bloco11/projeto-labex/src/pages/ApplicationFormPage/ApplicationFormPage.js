@@ -2,8 +2,8 @@ import InputItem from "../../components/InputItem";
 import { countries } from '../../constants/countries';
 import { useState } from "react";
 import { BASE_URL } from "../../constants/index";
-import axios from 'axios';
 import { useNavigate, useParams } from "react-router-dom";
+import { useApplyToTrip } from "../../hooks/useRequestData";
 
 const ApplicationFormPage = () => {
     const navigate = useNavigate()
@@ -40,22 +40,15 @@ const ApplicationFormPage = () => {
         return <option key={index} value={country.label} >{country.label}</option>
     })
 
-    const applyToTrip = () => {
-        const body = {
-            name: inputName,
-            age: inputAge,
-            applicationText: inputQuestion,
-            profession: inputProfession,
-            country: selectedCountry
-        }
-
-        axios.post(`${BASE_URL}/trips/${id}/apply`, body)
-            .then(res => {
-                alert(res.data.message)
-                navigate('/trips/list')
-            })
-            .catch(err => console.log(err))
+    const body = {
+        name: inputName,
+        age: inputAge,
+        applicationText: inputQuestion,
+        profession: inputProfession,
+        country: selectedCountry
     }
+
+    const { post } = useApplyToTrip()
 
     return (
         <div>
@@ -66,11 +59,11 @@ const ApplicationFormPage = () => {
                 value={inputQuestion} onChange={(ev) => onChangeInputQuestion(ev)} />
             <InputItem type='text' placeholder='Profession' value={inputProfession}
                 onChange={(ev) => onChangeInputProfession(ev)} />
-            <select onChange={(ev) => onChangeSelectCoutry(ev)} >
+            <select value={selectedCountry} onChange={(ev) => onChangeSelectCoutry(ev)} >
                 <option value='' >Select Country</option>
                 {countriesComponents}
             </select>
-            <button onClick={applyToTrip} >Apply</button>
+            <button onClick={() => post(`${BASE_URL}/trips/${id}/apply`, body)} >Apply</button>
         </div>
     );
 }

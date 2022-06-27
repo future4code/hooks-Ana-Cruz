@@ -18,16 +18,18 @@ const ContainerImg = styled.div`
   background-position: top center;
   background-repeat: no-repeat;
   background-size: cover;
-  position: relative;
-  width: 100%;
-  height: 100%;
+  /* position: relative; */
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 `
 
 const Container2 = styled.div`
-  height: 100%;
+  /* border: 1px solid yellow; */
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -40,7 +42,7 @@ function App() {
 
 
   return (
-    <Container>
+    // <Container>
       <ContainerImg>
         <GlobalStyle />
         <Header />
@@ -48,7 +50,7 @@ function App() {
           <Router />
         </Container2>
       </ContainerImg>
-    </Container>
+    // </Container>
   );
 }
 

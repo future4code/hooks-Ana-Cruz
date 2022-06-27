@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Container = styled.div`
     width: 100vw;
-    height: 15vh;
+    height: 8vh;
     /* background-color: pink; */
     color: gray;
     display: flex;
