@@ -1,0 +1,1 @@
+export const lista = ['tomar café', 'tomar banho', 'estudar']
