@@ -16,12 +16,13 @@ app.get('/ping', (req, res) => {
 
 app.get('/todos', (req: Request, res: Response) => {
     const status: string | undefined = req.query.status?.toString()
-    console.log(status)
     try{
         if (!status) {
             throw new Error("Campo obrigatório")
         } else{
-            res.send(afazeres.filter(afazer => afazer.completed.toString() === status))
+            res.send(afazeres.filter(afazer => {
+                return afazer.completed.toString() === status
+            }))
         }
     } catch(error: any) {
         res.send(error.message)
@@ -53,7 +54,9 @@ app.put('/edit/:id', (req: Request, res: Response) => {
                     task.completed = !tarefa.completed
                     status = task.completed
                 }
+                return task
             })
+            console.log(newList)
             res.send(status ? "Sua tarefa foi completada!" : "Sua tarefa ainda está pendente!")
         }
     } catch(error: any) {
@@ -78,8 +81,7 @@ app.delete('/delete/:id', (req: Request, res: Response) => {
 })
 
 app.get('/todos/:userId', (req: Request, res: Response) => {
-    const status: string | undefined = req.query.status?.toString()
-    console.log(status)
+    
     try{
         if (!status) {
             throw new Error("Campo obrigatório")
