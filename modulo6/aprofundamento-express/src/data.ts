@@ -37,3 +37,4 @@ export const afazeres: Afazeres[] = [
         "completed": false
       }
 ]
+

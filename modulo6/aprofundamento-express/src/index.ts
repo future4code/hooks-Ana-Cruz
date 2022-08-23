@@ -36,7 +36,6 @@ app.post('/create', (req: Request, res: Response) => {
         title: req.body.title,
         completed: false
     }
-
     afazeres.push(newList)
     res.status(201).send(afazeres)
 })
@@ -66,14 +65,14 @@ app.put('/edit/:id', (req: Request, res: Response) => {
 
 app.delete('/delete/:id', (req: Request, res: Response) => {
     const id = Number(req.params.id)
-    const tarefa = afazeres.find((tarefa) => tarefa.id === id)
-    const tarefaIndex = afazeres.findIndex((tarefa) => tarefa.id === id)
+    const tarefa: Afazeres | undefined = afazeres.find((tarefa) => tarefa.id === id)
+    const tarefaIndex: number = afazeres.findIndex((tarefa) => tarefa.id === id)
     try{
         if (!tarefa) {
             throw new Error("Tarefa não encontrada!")
         } else{
             afazeres.splice(tarefaIndex, 1)
-            res.send("Sua tarefa foi excluída!")
+            res.send(afazeres)
         }
     } catch(error: any) {
         res.send(error.message)
