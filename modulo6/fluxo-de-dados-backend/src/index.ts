@@ -17,17 +17,32 @@ app.get('/teste', (req: Request, res: Response) => {
 //Ex 3
 app.post('/produtos/criar', (req: Request, res: Response) => {
     let statusCode = 400;
+
     try {
         if (req.body.name === null || req.body.price === null) {
             statusCode = 422
-            throw new Error("Campo obrigatório!")
+            throw new Error("Dados obrigatórios!")
         } else {
+            if (typeof req.body.name !== 'string' || typeof req.body.price !== 'number') {
+                statusCode = 422
+                throw new Error("Digite um valor válido para este campo!")
+            } 
+            if (req.body.price < 0) {
+                statusCode = 422
+                throw new Error("Digite o preço com um valor válido")
+            } {
+                statusCode = 500
+                throw new Error("Ocorreu um erro inesperado")
+            }
+
             const newProduct: Produto = {
                 id: String(Date.now()),
                 name: req.body.name,
                 price: req.body.price
             }
+
             produtos.push(newProduct)
+
             res.status(201).send(produtos)
         }
     } catch (error: any) {
@@ -42,29 +57,58 @@ app.get('/produtos', (req: Request, res: Response) => {
 
 //Ex 5
 app.put('/produtos/editar-preco/:id', (req: Request, res: Response) => {
-    const produtoId: string | undefined = req.params.id
+    const produtoId = req.params.id
+    const newPrice = req.body.price
     let statusCode = 400;
+
     try {
-        if (produtoId === null) {
+        if (!produtoId) {
             statusCode = 400
             throw new Error("Campo id obrigatório!")
-        } else if(produtos.find(item => item.id === produtoId)) {
+        }
+
+        const index: number = 0
+        let novoProduto: Produto | undefined = produtos.find((produto, index) => {
+            if (produto.id === produtoId) {
+                index = index
+                return { id: produto.id, name: produto.name, price: newPrice }
+            }
+        })
+
+        if (!novoProduto) {
             statusCode = 404
             throw new Error("Produto não encontrado")
-        }else {
-            const produtoNew: Produto | undefined = produtos.find(produto => {
-                if(produto.id === produtoId){
-                    produto.price = req.body.price
-                    return produto
-                }
-            })
-            const newID: string | undefined = produtoNew?.id
-            const retirados: Produto[] = produtos.splice(Number(newID)+1, produtos.length-1)
-            // produtos.push(produtoNew)
-            
-
-            res.status(201).send(produtoNew)
         }
+
+        produtos.splice(index, 1, novoProduto)
+
+        res.status(201).send(produtos)
+    } catch (error: any) {
+        res.status(statusCode).send(error.message)
+    }
+})
+
+//Ex 6
+app.delete('/produtos/delete/:id', (req: Request, res: Response) => {
+    const produtoId = req.params.id
+    let statusCode = 400;
+
+    try {
+        if (!produtoId) {
+            statusCode = 400
+            throw new Error("Campo id obrigatório!")
+        }
+
+        const index: number = produtos.findIndex(produto => produto.id === produtoId)
+
+        if (index < 0) {
+            statusCode = 404
+            throw new Error("Produto não encontrado")
+        }
+
+        produtos.splice(index, 1)
+
+        res.status(201).send(produtos)
     } catch (error: any) {
         res.status(statusCode).send(error.message)
     }
