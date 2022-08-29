@@ -115,8 +115,6 @@ app.delete('/produtos/delete/:id', (req: Request, res: Response) => {
 })
 
 
-
-
 const server = app.listen(process.env.PORT || 3003, () => {
     if (server) {
         const address = server.address() as AddressInfo;
